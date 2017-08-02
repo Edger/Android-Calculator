@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">计算器</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <drawable name="clr_normal">#ff7315</drawable>
+	<drawable name="clr_pressed">#be4800</drawable>
+	
+    <drawable name="all_button_normal">#f1f1f1</drawable>
+	<drawable name="all_button_pressed">#e7e7e7</drawable>
+
+</resources>
