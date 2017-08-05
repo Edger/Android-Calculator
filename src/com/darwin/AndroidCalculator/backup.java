@@ -99,9 +99,9 @@ public class backup extends Activity implements OnClickListener {
 				darkModeFlag = field.getInt(layoutParams);
 				Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
 				if (dark) {
-					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// ×´Ì¬À¸Í¸Ã÷ÇÒºÚÉ«×ÖÌå
+					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// æ¦´æª„ìœ¼æ‹·ì¸ í• ë¶šî€Šä¿šç«Ÿ
 				} else {
-					extraFlagField.invoke(window, 0, darkModeFlag);// Çå³ıºÚÉ«×ÖÌå
+					extraFlagField.invoke(window, 0, darkModeFlag);// í—Œë‡œë¶šî€Šä¿šç«Ÿ
 				}
 				result = true;
 			} catch (Exception e) {
@@ -174,13 +174,13 @@ public class backup extends Activity implements OnClickListener {
 			str = Operator(str, "+");
 			break;
 		case R.id.button_minus:
-			str = Operator(str, "¡ª");
+			str = Operator(str, "â€•");
 			break;
 		case R.id.button_mutiply:
-			str = Operator(str, "¡Á");
+			str = Operator(str, "Ã—");
 			break;
 		case R.id.button_by:
-			str = Operator(str, "¡Â");
+			str = Operator(str, "Ã·");
 			break;
 		case R.id.button_equal:
 			str = Equals(str);
@@ -196,7 +196,7 @@ public class backup extends Activity implements OnClickListener {
 			str = Percent(str);
 			break;
 		case R.id.button_delete:
-			if (str.contains("£½")) {
+			if (str.contains("ï¼")) {
 
 			} else if (str.length() > 0) {
 				str = str.substring(0, str.length() - 1);
@@ -211,13 +211,13 @@ public class backup extends Activity implements OnClickListener {
 	}
 
 	public String Operator(String str, String operator) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
 			str = 0 + operator;
-		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á")
-				|| str.endsWith("¡Â")) {
+		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("â€•") || str.endsWith("â‰ ")
+				|| str.endsWith("â‰¤")) {
 			str = str.substring(0, str.length() - 1) + operator;
 		} else {
 			str += operator;
@@ -227,11 +227,11 @@ public class backup extends Activity implements OnClickListener {
 	}
 
 	public String Number(String str, String number) {
-		if (str.isEmpty() || str.contains("£½")) {
+		if (str.isEmpty() || str.contains("ï¼")) {
 			str = number;
 		} else if (str.contains("0") && str.length() == 1) {
 			str = number;
-		} else if (str.endsWith("+0") || str.endsWith("¡ª0") || str.endsWith("¡Á0") || str.endsWith("¡Â0")) {
+		} else if (str.endsWith("+0") || str.endsWith("â€•0") || str.endsWith("â‰ 0") || str.endsWith("â‰¤0")) {
 			str = str.substring(0, str.length() - 1) + number;
 		} else {
 			str += number;
@@ -241,16 +241,16 @@ public class backup extends Activity implements OnClickListener {
 	}
 
 	public String Dot(String str, String dot) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
-		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("¡ª") && !str.endsWith("¡Á")
-				&& !str.endsWith("¡Â")) {
-			if (str.contains("+") || str.contains("¡ª") || str.contains("¡Á") || str.contains("¡Â")) {
+		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("â€•") && !str.endsWith("â‰ ")
+				&& !str.endsWith("â‰¤")) {
+			if (str.contains("+") || str.contains("â€•") || str.contains("â‰ ") || str.contains("â‰¤")) {
 				int indexOfOperator = 0;
 				for (int i = str.length() - 1; i > 0; i--) {
-					if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+					if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'â‰ ' || str.charAt(i) == 'â‰¤') {
 						indexOfOperator = i;
 						break;
 					}
@@ -271,14 +271,14 @@ public class backup extends Activity implements OnClickListener {
 	}
 
 	public String Percent(String str) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
 			str = "0";
-		} else if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")) {
+		} else if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("â‰ ") || str.endsWith("â‰¤")) {
 
-		} else if (!str.contains("+") && !str.contains("¡ª") && !str.contains("¡Á") && !str.contains("¡Â")) {
+		} else if (!str.contains("+") && !str.contains("â€•") && !str.contains("â‰ ") && !str.contains("â‰¤")) {
 			if (str.endsWith(".")) {
 				str = str.substring(0, str.length() - 1);
 			}
@@ -290,7 +290,7 @@ public class backup extends Activity implements OnClickListener {
 			String subString = null;
 
 			for (int i = str.length() - 1; i > 0; i--) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+				if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'â‰ ' || str.charAt(i) == 'â‰¤') {
 					if (str.charAt(i - 1) != 'E') {
 						indexOfOperator = i;
 						break;
@@ -326,39 +326,39 @@ public class backup extends Activity implements OnClickListener {
 	}
 
 	public String Equals(String str) {
-		if (str.contains("£½")) {
-			str = str.substring(0, str.indexOf('£½'));
+		if (str.contains("ï¼")) {
+			str = str.substring(0, str.indexOf('ï¼'));
 		}
 		if (str.length() == 0) {
 			str = "0";
-		} else if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")
+		} else if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("â‰ ") || str.endsWith("â‰¤")
 				|| str.endsWith(".")) {
 			str = str.substring(0, str.length() - 1);
 		}
-		if (!str.contains("+") && !str.contains("¡ª") && !str.contains("¡Á") && !str.contains("¡Â")) {
-			str = str + "£½" + str;
+		if (!str.contains("+") && !str.contains("â€•") && !str.contains("â‰ ") && !str.contains("â‰¤")) {
+			str = str + "ï¼" + str;
 		} else {
-			// ×ª»»Îªºó×º±í´ïÊ½
+			// ç˜»ë»£æ§¨ë¹ˆç•™ê¹ŠëŒé§•
 			Stack<String> stack = new Stack<String>();
 			ArrayList<String> arrayList = new ArrayList<String>();
 			String tempString = "";
 
-			if (str.charAt(0) == '¡ª') {
+			if (str.charAt(0) == 'â€•') {
 				tempString = "0";
 			}
 
 			for (int i = 0; i < str.length(); i++) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+				if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'â‰ ' || str.charAt(i) == 'â‰¤') {
 					arrayList.add(tempString);
 					tempString = "";
 					if (!stack.empty()) {
-						if (str.charAt(i) == '+' || str.charAt(i) == '¡ª') {
+						if (str.charAt(i) == '+' || str.charAt(i) == 'â€•') {
 							while (!stack.empty()) {
 								arrayList.add(stack.pop());
 							}
 							stack.push(str.charAt(i) + "");
 						} else {
-							while (!stack.empty() && (stack.peek().contains("¡Á") || stack.peek().contains("¡Â"))) {
+							while (!stack.empty() && (stack.peek().contains("â‰ ") || stack.peek().contains("â‰¤"))) {
 								arrayList.add(stack.pop());
 							}
 							stack.push(str.charAt(i) + "");
@@ -384,11 +384,11 @@ public class backup extends Activity implements OnClickListener {
 			}
 
 			for (int i = 0; i < arrayList.size(); i++) {
-				// ºó×º±í´ïÊ½ÇóÖµ
+				// ë¹ˆç•™ê¹ŠëŒé§•í—¹ä»¤
 				if (arrayList.get(i).contains("E")) {
 					stack.push(arrayList.get(i));
-				} else if (!arrayList.get(i).contains("+") && !arrayList.get(i).contains("¡ª")
-						&& !arrayList.get(i).contains("¡Á") && !arrayList.get(i).contains("¡Â")) {
+				} else if (!arrayList.get(i).contains("+") && !arrayList.get(i).contains("â€•")
+						&& !arrayList.get(i).contains("â‰ ") && !arrayList.get(i).contains("â‰¤")) {
 					stack.push(arrayList.get(i));
 				} else {
 					if (!stack.empty()) {
@@ -400,17 +400,17 @@ public class backup extends Activity implements OnClickListener {
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand1 + operand2);
 						}
-						if (arrayList.get(i).contains("¡ª")) {
+						if (arrayList.get(i).contains("â€•")) {
 							operand1 = Double.parseDouble(stack.pop());
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand2 - operand1);
 						}
-						if (arrayList.get(i).contains("¡Á")) {
+						if (arrayList.get(i).contains("â‰ ")) {
 							operand1 = Double.parseDouble(stack.pop());
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand1 * operand2);
 						}
-						if (arrayList.get(i).contains("¡Â")) {
+						if (arrayList.get(i).contains("â‰¤")) {
 							operand1 = Double.parseDouble(stack.pop());
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand2 / operand1);
@@ -422,7 +422,7 @@ public class backup extends Activity implements OnClickListener {
 					}
 				}
 			}
-			str = str + "£½" + stack.pop();
+			str = str + "ï¼" + stack.pop();
 		}
 		Display(str);
 		return str;
@@ -436,20 +436,20 @@ public class backup extends Activity implements OnClickListener {
 			if (str.charAt(i) == 'e') {
 				i = i + 2;
 			}
-			if (str.charAt(i) == '£½') {
+			if (str.charAt(i) == 'ï¼') {
 				String partOne = str.substring(0, i);
 				String partTwo = str.substring(i + 1);
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				break;
 			}
-			if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+			if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'â‰ ' || str.charAt(i) == 'â‰¤') {
 				String partOne = str.substring(0, i);
 				String partTwo = str.substring(i + 1);
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				i = i + 4;
 			}
 		}
-		if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")) {
+		if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("â‰ ") || str.endsWith("â‰¤")) {
 			str = str.substring(0, str.length() - 1) + " \n" + str.substring(str.length() - 1) + "     ";
 		} else {
 			str = str + " ";
