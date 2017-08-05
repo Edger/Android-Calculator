@@ -101,9 +101,9 @@ public class MainActivity extends Activity implements OnClickListener {
 				darkModeFlag = field.getInt(layoutParams);
 				Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
 				if (dark) {
-					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// ×´Ì¬À¸Í¸Ã÷ÇÒºÚÉ«×ÖÌå
+					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// çŠ¶æ€æ é€æ˜ä¸”é»‘è‰²å­—ä½“
 				} else {
-					extraFlagField.invoke(window, 0, darkModeFlag);// Çå³ıºÚÉ«×ÖÌå
+					extraFlagField.invoke(window, 0, darkModeFlag);// æ¸…é™¤é»‘è‰²å­—ä½“
 				}
 				result = true;
 			} catch (Exception e) {
@@ -176,13 +176,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			str = Operator(str, "+");
 			break;
 		case R.id.button_minus:
-			str = Operator(str, "¡ª");
+			str = Operator(str, "â€•");
 			break;
 		case R.id.button_mutiply:
-			str = Operator(str, "¡Á");
+			str = Operator(str, "Ã—");
 			break;
 		case R.id.button_by:
-			str = Operator(str, "¡Â");
+			str = Operator(str, "Ã·");
 			break;
 		case R.id.button_equal:
 			str = Equals(str);
@@ -209,14 +209,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Delete(String str) {
-		if (str.contains("£½")) {
+		if (str.contains("ï¼")) {
 
-		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("¡ª") && !str.endsWith("¡Á")
-				&& !str.endsWith("¡Â")) {
-			if (str.contains("+") || str.contains("¡ª") || str.contains("¡Á") || str.contains("¡Â")) {
+		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("â€•") && !str.endsWith("Ã—")
+				&& !str.endsWith("Ã·")) {
+			if (str.contains("+") || str.contains("â€•") || str.contains("Ã—") || str.contains("Ã·")) {
 				int indexOfOperator = 0;
 				for (int i = str.length() - 1; i > 0; i--) {
-					if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+					if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'Ã—' || str.charAt(i) == 'Ã·') {
 						indexOfOperator = i;
 						break;
 					}
@@ -237,15 +237,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Operator(String str, String operator) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
 			str = 0 + operator;
 		} else if (str.contains("Infinity")) {
 
-		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á")
-				|| str.endsWith("¡Â")) {
+		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("â€•") || str.endsWith("Ã—")
+				|| str.endsWith("Ã·")) {
 			str = str.substring(0, str.length() - 1) + operator;
 		} else {
 			str += operator;
@@ -255,11 +255,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Number(String str, String number) {
-		if (str.isEmpty() || str.contains("£½") || str.contains("Infinity")) {
+		if (str.isEmpty() || str.contains("ï¼") || str.contains("Infinity")) {
 			str = number;
 		} else if (str.equals("0")) {
 			str = number;
-		} else if (str.endsWith("+0") || str.endsWith("¡ª0") || str.endsWith("¡Á0") || str.endsWith("¡Â0")) {
+		} else if (str.endsWith("+0") || str.endsWith("â€•0") || str.endsWith("Ã—0") || str.endsWith("Ã·0")) {
 			str = str.substring(0, str.length() - 1) + number;
 		} else {
 			str += number;
@@ -269,18 +269,18 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Dot(String str, String dot) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
 		} else if (str.contains("Infinity")) {
 
-		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("¡ª") && !str.endsWith("¡Á")
-				&& !str.endsWith("¡Â")) {
-			if (str.contains("+") || str.contains("¡ª") || str.contains("¡Á") || str.contains("¡Â")) {
+		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("â€•") && !str.endsWith("Ã—")
+				&& !str.endsWith("Ã·")) {
+			if (str.contains("+") || str.contains("â€•") || str.contains("Ã—") || str.contains("Ã·")) {
 				int indexOfOperator = 0;
 				for (int i = str.length() - 1; i > 0; i--) {
-					if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+					if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'Ã—' || str.charAt(i) == 'Ã·') {
 						indexOfOperator = i;
 						break;
 					}
@@ -301,16 +301,16 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Percent(String str) {
-		if (str.contains("£½")) {
-			str = str.substring(str.indexOf("£½") + 1);
+		if (str.contains("ï¼")) {
+			str = str.substring(str.indexOf("ï¼") + 1);
 		}
 		if (str.isEmpty()) {
 			str = "0";
 		} else if (str.contains("Infinity")) {
 
-		} else if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")) {
+		} else if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("Ã—") || str.endsWith("Ã·")) {
 
-		} else if (!str.contains("+") && !str.contains("¡ª") && !str.contains("¡Á") && !str.contains("¡Â")) {
+		} else if (!str.contains("+") && !str.contains("â€•") && !str.contains("Ã—") && !str.contains("Ã·")) {
 			if (str.endsWith(".")) {
 				str = str.substring(0, str.length() - 1);
 			}
@@ -320,7 +320,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			String subString = null;
 
 			for (int i = str.length() - 1; i > 0; i--) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+				if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'Ã—' || str.charAt(i) == 'Ã·') {
 					if (str.charAt(i - 1) != 'E') {
 						indexOfOperator = i;
 						break;
@@ -348,39 +348,39 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	public String Equals(String str) {
-		if (str.contains("£½")) {
-			str = str.substring(0, str.indexOf('£½'));
+		if (str.contains("ï¼")) {
+			str = str.substring(0, str.indexOf('ï¼'));
 		}
 		if (str.length() == 0) {
 			str = "0";
-		} else if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")
+		} else if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("Ã—") || str.endsWith("Ã·")
 				|| str.endsWith(".")) {
 			str = str.substring(0, str.length() - 1);
 		}
-		if (!str.contains("+") && !str.contains("¡ª") && !str.contains("¡Á") && !str.contains("¡Â")) {
-			str = str + "£½" + str;
+		if (!str.contains("+") && !str.contains("â€•") && !str.contains("Ã—") && !str.contains("Ã·")) {
+			str = str + "ï¼" + str;
 		} else {
-			// ×ª»»Îªºó×º±í´ïÊ½
+			// è½¬æ¢ä¸ºåç¼€è¡¨è¾¾å¼
 			Stack<String> stack = new Stack<String>();
 			ArrayList<String> arrayList = new ArrayList<String>();
 			String tempString = "";
 
-			if (str.charAt(0) == '¡ª') {
+			if (str.charAt(0) == 'â€•') {
 				tempString = "0";
 			}
 
 			for (int i = 0; i < str.length(); i++) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+				if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'Ã—' || str.charAt(i) == 'Ã·') {
 					arrayList.add(tempString);
 					tempString = "";
 					if (!stack.empty()) {
-						if (str.charAt(i) == '+' || str.charAt(i) == '¡ª') {
+						if (str.charAt(i) == '+' || str.charAt(i) == 'â€•') {
 							while (!stack.empty()) {
 								arrayList.add(stack.pop());
 							}
 							stack.push(str.charAt(i) + "");
 						} else {
-							while (!stack.empty() && (stack.peek().equals("¡Á") || stack.peek().equals("¡Â"))) {
+							while (!stack.empty() && (stack.peek().equals("Ã—") || stack.peek().equals("Ã·"))) {
 								arrayList.add(stack.pop());
 							}
 							stack.push(str.charAt(i) + "");
@@ -406,11 +406,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 
 			for (int i = 0; i < arrayList.size(); i++) {
-				// ºó×º±í´ïÊ½ÇóÖµ
+				// åç¼€è¡¨è¾¾å¼æ±‚å€¼
 				if (arrayList.get(i).contains("E")) {
 					stack.push(arrayList.get(i));
-				} else if (!arrayList.get(i).equals("+") && !arrayList.get(i).equals("¡ª")
-						&& !arrayList.get(i).equals("¡Á") && !arrayList.get(i).equals("¡Â")) {
+				} else if (!arrayList.get(i).equals("+") && !arrayList.get(i).equals("â€•")
+						&& !arrayList.get(i).equals("Ã—") && !arrayList.get(i).equals("Ã·")) {
 					stack.push(arrayList.get(i));
 				} else {
 					if (!stack.empty()) {
@@ -422,17 +422,17 @@ public class MainActivity extends Activity implements OnClickListener {
 							operand2 = stack.pop();
 							result = Double.toString(AccurateArithmetic.add(operand1, operand2));
 						}
-						if (arrayList.get(i).equals("¡ª")) {
+						if (arrayList.get(i).equals("â€•")) {
 							operand1 = stack.pop();
 							operand2 = stack.pop();
 							result = Double.toString(AccurateArithmetic.sub(operand2, operand1));
 						}
-						if (arrayList.get(i).equals("¡Á")) {
+						if (arrayList.get(i).equals("Ã—")) {
 							operand1 = stack.pop();
 							operand2 = stack.pop();
 							result = Double.toString(AccurateArithmetic.mul(operand1, operand2));
 						}
-						if (arrayList.get(i).equals("¡Â")) {
+						if (arrayList.get(i).equals("Ã·")) {
 							operand1 = stack.pop();
 							operand2 = stack.pop();
 							if (operand1.equals("0")) {
@@ -448,7 +448,7 @@ public class MainActivity extends Activity implements OnClickListener {
 					}
 				}
 			}
-			str = str + "£½" + stack.pop();
+			str = str + "ï¼" + stack.pop();
 		}
 		Display(str);
 		return str;
@@ -462,20 +462,20 @@ public class MainActivity extends Activity implements OnClickListener {
 			if (str.charAt(i) == 'e') {
 				i = i + 2;
 			}
-			if (str.charAt(i) == '£½') {
+			if (str.charAt(i) == 'ï¼') {
 				String partOne = str.substring(0, i);
 				String partTwo = str.substring(i + 1);
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				break;
 			}
-			if (str.charAt(i) == '+' || str.charAt(i) == '¡ª' || str.charAt(i) == '¡Á' || str.charAt(i) == '¡Â') {
+			if (str.charAt(i) == '+' || str.charAt(i) == 'â€•' || str.charAt(i) == 'Ã—' || str.charAt(i) == 'Ã·') {
 				String partOne = str.substring(0, i);
 				String partTwo = str.substring(i + 1);
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				i = i + 4;
 			}
 		}
-		if (str.endsWith("+") || str.endsWith("¡ª") || str.endsWith("¡Á") || str.endsWith("¡Â")) {
+		if (str.endsWith("+") || str.endsWith("â€•") || str.endsWith("Ã—") || str.endsWith("Ã·")) {
 			str = str.substring(0, str.length() - 1) + " \n" + str.substring(str.length() - 1) + "     ";
 		} else {
 			str = str + " ";

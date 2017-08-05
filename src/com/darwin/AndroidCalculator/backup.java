@@ -99,9 +99,9 @@ public class backup extends Activity implements OnClickListener {
 				darkModeFlag = field.getInt(layoutParams);
 				Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
 				if (dark) {
-					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// 榴檄으拷츠할붚俚竟
+					extraFlagField.invoke(window, darkModeFlag, darkModeFlag);// 状态栏透明且黑色字体
 				} else {
-					extraFlagField.invoke(window, 0, darkModeFlag);// 헌뇜붚俚竟
+					extraFlagField.invoke(window, 0, darkModeFlag);// 清除黑色字体
 				}
 				result = true;
 			} catch (Exception e) {
@@ -216,8 +216,8 @@ public class backup extends Activity implements OnClickListener {
 		}
 		if (str.isEmpty()) {
 			str = 0 + operator;
-		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("―") || str.endsWith("≠")
-				|| str.endsWith("≤")) {
+		} else if (str.endsWith(".") || str.endsWith("+") || str.endsWith("―") || str.endsWith("×")
+				|| str.endsWith("÷")) {
 			str = str.substring(0, str.length() - 1) + operator;
 		} else {
 			str += operator;
@@ -231,7 +231,7 @@ public class backup extends Activity implements OnClickListener {
 			str = number;
 		} else if (str.contains("0") && str.length() == 1) {
 			str = number;
-		} else if (str.endsWith("+0") || str.endsWith("―0") || str.endsWith("≠0") || str.endsWith("≤0")) {
+		} else if (str.endsWith("+0") || str.endsWith("―0") || str.endsWith("×0") || str.endsWith("÷0")) {
 			str = str.substring(0, str.length() - 1) + number;
 		} else {
 			str += number;
@@ -245,12 +245,12 @@ public class backup extends Activity implements OnClickListener {
 			str = str.substring(str.indexOf("＝") + 1);
 		}
 		if (str.isEmpty()) {
-		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("―") && !str.endsWith("≠")
-				&& !str.endsWith("≤")) {
-			if (str.contains("+") || str.contains("―") || str.contains("≠") || str.contains("≤")) {
+		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("―") && !str.endsWith("×")
+				&& !str.endsWith("÷")) {
+			if (str.contains("+") || str.contains("―") || str.contains("×") || str.contains("÷")) {
 				int indexOfOperator = 0;
 				for (int i = str.length() - 1; i > 0; i--) {
-					if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '≠' || str.charAt(i) == '≤') {
+					if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '×' || str.charAt(i) == '÷') {
 						indexOfOperator = i;
 						break;
 					}
@@ -276,9 +276,9 @@ public class backup extends Activity implements OnClickListener {
 		}
 		if (str.isEmpty()) {
 			str = "0";
-		} else if (str.endsWith("+") || str.endsWith("―") || str.endsWith("≠") || str.endsWith("≤")) {
+		} else if (str.endsWith("+") || str.endsWith("―") || str.endsWith("×") || str.endsWith("÷")) {
 
-		} else if (!str.contains("+") && !str.contains("―") && !str.contains("≠") && !str.contains("≤")) {
+		} else if (!str.contains("+") && !str.contains("―") && !str.contains("×") && !str.contains("÷")) {
 			if (str.endsWith(".")) {
 				str = str.substring(0, str.length() - 1);
 			}
@@ -290,7 +290,7 @@ public class backup extends Activity implements OnClickListener {
 			String subString = null;
 
 			for (int i = str.length() - 1; i > 0; i--) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '≠' || str.charAt(i) == '≤') {
+				if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '×' || str.charAt(i) == '÷') {
 					if (str.charAt(i - 1) != 'E') {
 						indexOfOperator = i;
 						break;
@@ -331,14 +331,14 @@ public class backup extends Activity implements OnClickListener {
 		}
 		if (str.length() == 0) {
 			str = "0";
-		} else if (str.endsWith("+") || str.endsWith("―") || str.endsWith("≠") || str.endsWith("≤")
+		} else if (str.endsWith("+") || str.endsWith("―") || str.endsWith("×") || str.endsWith("÷")
 				|| str.endsWith(".")) {
 			str = str.substring(0, str.length() - 1);
 		}
-		if (!str.contains("+") && !str.contains("―") && !str.contains("≠") && !str.contains("≤")) {
+		if (!str.contains("+") && !str.contains("―") && !str.contains("×") && !str.contains("÷")) {
 			str = str + "＝" + str;
 		} else {
-			// 瘻뻣槨빈留깊댐駕
+			// 转换为后缀表达式
 			Stack<String> stack = new Stack<String>();
 			ArrayList<String> arrayList = new ArrayList<String>();
 			String tempString = "";
@@ -348,7 +348,7 @@ public class backup extends Activity implements OnClickListener {
 			}
 
 			for (int i = 0; i < str.length(); i++) {
-				if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '≠' || str.charAt(i) == '≤') {
+				if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '×' || str.charAt(i) == '÷') {
 					arrayList.add(tempString);
 					tempString = "";
 					if (!stack.empty()) {
@@ -358,7 +358,7 @@ public class backup extends Activity implements OnClickListener {
 							}
 							stack.push(str.charAt(i) + "");
 						} else {
-							while (!stack.empty() && (stack.peek().contains("≠") || stack.peek().contains("≤"))) {
+							while (!stack.empty() && (stack.peek().contains("×") || stack.peek().contains("÷"))) {
 								arrayList.add(stack.pop());
 							}
 							stack.push(str.charAt(i) + "");
@@ -384,11 +384,11 @@ public class backup extends Activity implements OnClickListener {
 			}
 
 			for (int i = 0; i < arrayList.size(); i++) {
-				// 빈留깊댐駕헹令
+				// 后缀表达式求值
 				if (arrayList.get(i).contains("E")) {
 					stack.push(arrayList.get(i));
 				} else if (!arrayList.get(i).contains("+") && !arrayList.get(i).contains("―")
-						&& !arrayList.get(i).contains("≠") && !arrayList.get(i).contains("≤")) {
+						&& !arrayList.get(i).contains("×") && !arrayList.get(i).contains("÷")) {
 					stack.push(arrayList.get(i));
 				} else {
 					if (!stack.empty()) {
@@ -405,12 +405,12 @@ public class backup extends Activity implements OnClickListener {
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand2 - operand1);
 						}
-						if (arrayList.get(i).contains("≠")) {
+						if (arrayList.get(i).contains("×")) {
 							operand1 = Double.parseDouble(stack.pop());
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand1 * operand2);
 						}
-						if (arrayList.get(i).contains("≤")) {
+						if (arrayList.get(i).contains("÷")) {
 							operand1 = Double.parseDouble(stack.pop());
 							operand2 = Double.parseDouble(stack.pop());
 							result = Double.toString(operand2 / operand1);
@@ -442,14 +442,14 @@ public class backup extends Activity implements OnClickListener {
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				break;
 			}
-			if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '≠' || str.charAt(i) == '≤') {
+			if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '×' || str.charAt(i) == '÷') {
 				String partOne = str.substring(0, i);
 				String partTwo = str.substring(i + 1);
 				str = partOne + " \n" + str.charAt(i) + "  " + partTwo;
 				i = i + 4;
 			}
 		}
-		if (str.endsWith("+") || str.endsWith("―") || str.endsWith("≠") || str.endsWith("≤")) {
+		if (str.endsWith("+") || str.endsWith("―") || str.endsWith("×") || str.endsWith("÷")) {
 			str = str.substring(0, str.length() - 1) + " \n" + str.substring(str.length() - 1) + "     ";
 		} else {
 			str = str + " ";
