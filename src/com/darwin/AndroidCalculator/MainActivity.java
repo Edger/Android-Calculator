@@ -213,18 +213,23 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		} else if (!str.endsWith(".") && !str.endsWith("+") && !str.endsWith("―") && !str.endsWith("×")
 				&& !str.endsWith("÷")) {
-			if (str.contains("+") || str.contains("―") || str.contains("×") || str.contains("÷")) {
+			if (str.contains("+") || str.contains("―") || str.contains("×") || str.contains("÷") || str.contains("-")) {
 				int indexOfOperator = 0;
 				for (int i = str.length() - 1; i > 0; i--) {
 					if (str.charAt(i) == '+' || str.charAt(i) == '―' || str.charAt(i) == '×' || str.charAt(i) == '÷') {
-						indexOfOperator = i;
-						break;
+						if (str.charAt(i - 1) != 'E') {
+							indexOfOperator = i;
+							break;
+						}
 					}
 				}
-				String subString = str.substring(indexOfOperator + 1, str.length());
-				if (subString.contains("E")) {
+				if (indexOfOperator == 0) {
 				} else {
-					str = str.substring(0, str.length() - 1);
+					String subString = str.substring(indexOfOperator + 1, str.length());
+					if (subString.contains("E")) {
+					} else {
+						str = str.substring(0, str.length() - 1);
+					}
 				}
 			} else if (str.length() > 0) {
 				str = str.substring(0, str.length() - 1);
@@ -365,6 +370,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			ArrayList<String> arrayList = new ArrayList<String>();
 			String tempString = "";
 
+			//在负数之前添0
 			if (str.charAt(0) == '―') {
 				tempString = "0";
 			}
